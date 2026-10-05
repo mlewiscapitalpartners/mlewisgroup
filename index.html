@@ -517,7 +517,7 @@
         </div>
       </div>
     </div>
-
+    <ImageFeatureSection />
     <!-- BUSINESS CAROUSEL -->
     <div class="detail-section" style="padding: 70px 0; background: #fafaf8; overflow: hidden;">
       <div class="container">
@@ -6619,6 +6619,89 @@
   }
 
 })();
+  /* ============================================================
+   IMAGE FEATURE SECTION
+   — Self-contained. Insert anywhere.
+   ============================================================ */
+function ImageFeatureSection({
+  src = '3dbdfcd5-d5fe-4746-999a-7bede5e66420.png',
+  eyebrow = 'ML Gateway',
+  title = 'Explore ML Gateway.',
+  description = 'Private capital, matched to opportunity — a curated pathway between growth opportunities and private capital across African markets.',
+  ctaLabel = 'Explore Us',
+  ctaHref = 'https://mlgateway.mlewisgroup.com',
+  side = 'left',
+}) {
+  const [aspect, setAspect] = useState(null);
+
+  const handleLoad = (e) => {
+    const img = e.currentTarget;
+    if (img.naturalWidth && img.naturalHeight) {
+      setAspect(`${img.naturalWidth} / ${img.naturalHeight}`);
+    }
+  };
+
+  const imageCol = (
+    <div className="relative w-full">
+      <div className="absolute -inset-4 bg-[#F5B722]/10 rounded-sm blur-3xl pointer-events-none" />
+      <div
+        className="relative w-full rounded-sm overflow-hidden border border-[#071224]/10 bg-white shadow-[0_24px_60px_-24px_rgba(7,18,36,0.28)]"
+        style={aspect ? { aspectRatio: aspect } : { aspectRatio: '4 / 3' }}
+      >
+        <img
+          src={src}
+          alt=""
+          loading="lazy"
+          onLoad={handleLoad}
+          className="w-full h-full object-contain block"
+        />
+      </div>
+    </div>
+  );
+
+  const contentCol = (
+    <div className="flex flex-col justify-center">
+      <div className="flex items-center gap-4 mb-7">
+        <span className="w-10 h-[2px] bg-[#F5B722] rounded-full" />
+        <Micro>{eyebrow}</Micro>
+      </div>
+
+      <h2 className="serif text-[clamp(2rem,4.5vw,3rem)] leading-[1.1] text-[#071224] mb-5">
+        {title}
+      </h2>
+
+      <p className="text-[15.5px] leading-relaxed text-[#071224]/60 max-w-lg mb-10">
+        {description}
+      </p>
+
+      <a
+        href={ctaHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group inline-flex items-center justify-center gap-3 self-start rounded-sm bg-[#F5B722] text-[#071224] px-8 py-4 text-[13.5px] font-semibold tracking-wide transition-all duration-300 hover:bg-[#FFCA3A] hover:shadow-[0_0_25px_rgba(245,183,34,0.35)]"
+      >
+        {ctaLabel}
+        <Arrow className="transition-transform duration-300 group-hover:translate-x-1" />
+      </a>
+
+      <div className="mt-5 flex items-center gap-2 text-[11px] tracking-[0.14em] uppercase text-[#071224]/35 font-medium">
+        <span className="w-1.5 h-1.5 rounded-full bg-[#F5B722]" />
+        mlgateway.mlewisgroup.com
+      </div>
+    </div>
+  );
+
+  return (
+    <section className="bg-[#F0F4F8]">
+      <div className="max-w-[1320px] mx-auto px-6 lg:px-10 py-16 lg:py-24">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className={side === 'right' ? 'lg:order-2' : 'lg:order-1'}>{imageCol}</div>
+          <div className={side === 'right' ? 'lg:order-1' : 'lg:order-2'}>{contentCol}</div>
+        </div>
+      </div>
+    </section>
+  );
+  }
 </script>
 
 </body>
